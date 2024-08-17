@@ -1,0 +1,22 @@
+/* Home page */
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 50px 20px 30px;
+}
+/* Title */
+.title {
+  font-size: 26px;
+}
+/* Description */
+.description {
+  font-size: 14px;
+  line-height: 27px;
+  font-weight: 540;
+}
+/* Inventory button */
+.inventoryBtn {
+  padding: 12px 15px;
+}

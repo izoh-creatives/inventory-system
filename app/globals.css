@@ -1,0 +1,33 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "Trebuchet MS";
+  background-color: #f8f8f8;
+}
+input,
+select,
+textarea {
+  width: 100%;
+  min-height: 35px;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  font-size: 12px;
+  font-weight: 550;
+  font-family: "Trebuchet Ms";
+  letter-spacing: 0.5px;
+  background: rgb(229, 228, 228);
+  color: #1e1d1dea;
+  padding: 12px 8px;
+}
+button {
+  border: none;
+  outline: none;
+}

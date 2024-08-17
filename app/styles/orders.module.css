@@ -1,0 +1,13 @@
+/* Customers page */
+.customers {
+  padding: 30px 12px;
+}
+/* Heading */
+.title {
+  font-size: 27px;
+  margin-bottom: 25px;
+}
+/* Description */
+.description {
+  font-size: 15px;
+}

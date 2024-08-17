@@ -1,0 +1,206 @@
+/* Common styles */
+/* Every dashboard page */
+.adminPage {
+  width: 100%;
+  /* overflow-x: hidden; */
+  padding: 25px;
+}
+/* Feedback */
+.feedback {
+  width: 100%;
+  background: #007bff;
+  color: #fff;
+  border-radius: 3px;
+  font-size: 13px;
+  padding: 12px;
+}
+/* Add item button */
+.addBtn {
+  width: fit-content;
+  padding: 10px 13px !important;
+}
+/* Form submit button */
+.formBtn {
+  background: #007bff;
+  color: #fff;
+  border-radius: 18px;
+  transition: 0.6s;
+  padding: 12px 18px;
+}
+.formBtn:hover {
+  background: #000;
+  cursor: pointer;
+}
+/* Tables */
+.intro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+/* Product results text */
+.introText {
+  font-size: 15px;
+}
+/* Pagination and add buttons */
+.introButtons {
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+}
+/* Pagination button */
+.pagination {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+.paginationBtn {
+  background: lightgrey;
+  color: #000;
+  border-radius: 3px;
+  font-size: 12px;
+  transition: 0.6s;
+  padding: 9px 10px;
+}
+.paginationBtn:hover {
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+/* Table */
+.table {
+  border: 1px solid lightgray;
+  overflow-x: auto !important;
+}
+/* Table header */
+.header {
+  display: grid;
+  background: lightgray;
+  font-size: 13px;
+  font-weight: 550;
+  padding: 14px 10px;
+}
+/* Table data row */
+.body {
+  display: grid;
+  font-size: 13px;
+  border-bottom: 1px solid rgb(238, 236, 236);
+  padding: 12px 10px;
+}
+.body:last-child {
+  border-bottom: none;
+}
+.body:hover {
+  background: rgb(238, 236, 236);
+}
+/* Actions */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.action:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.edit {
+  color: #28a745;
+}
+.delete {
+  color: red;
+}
+/* Forms */
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 25px;
+  margin-top: 30px;
+}
+/* Dashboard pages */
+/* Products */
+.products .header {
+  grid-template-columns: 0.5fr 1fr 3fr 1fr 1fr;
+}
+.products .body {
+  grid-template-columns: 0.5fr 1fr 3fr 1fr 1fr;
+}
+/* New product  */
+.newProduct {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+}
+.productForm {
+  width: 100%;
+  row-gap: 35px;
+}
+.productImages {
+  display: flex;
+  align-items: flex-start;
+  column-gap: 30px;
+}
+.productImage {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 8px;
+}
+.productImage .img {
+  width: 120px;
+  height: 130px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  object-fit: cover;
+}
+.deleteText {
+  color: red;
+  font-size: 13px;
+  cursor: pointer;
+}
+/* Categories */
+.categories {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 20px;
+  padding: 25px;
+}
+.categories .addBtn {
+  align-self: flex-end;
+}
+.categories .table {
+  width: 100%;
+}
+.categories .header,
+.categories .body {
+  width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+}
+/* Category add and update page */
+.categoryPage {
+  padding: 25px;
+}
+/* Category add and update form */
+.categoryForm {
+  width: 100%;
+}
+/* Responsive */
+@media screen and (max-width: 768px) {
+  /* Every dashboard page */
+  .adminPage {
+    width: 100%;
+    overflow-x: hidden;
+    padding: 25px 12px;
+  }
+  /* Categories */
+  .categories {
+    padding: 0;
+  }
+  /* Category update page */
+  .categoryPage {
+    padding: 0;
+  }
+}
