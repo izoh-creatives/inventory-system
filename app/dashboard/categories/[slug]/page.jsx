@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 
 import styles from "@/app/styles/dashboard.module.css";
 import supabase from "@/app/config/supabaseClient";
+import Loading from "@/app/loading";
 import Feedback from "@/app/components/dashboard/Feedback";
 import RoundBtn from "@/app/components/common/RoundBtn";
 import FormBtn from "@/app/components/dashboard/FormBtn";
@@ -15,6 +16,7 @@ const CategoryUpdate = ({ params }) => {
   const { slug } = params;
 
   const [category, setCategory] = useState();
+  const [loading, setLoading] = useState(true);
   const [feedback, setFeedback] = useState("");
 
   //Get category on page load
@@ -24,6 +26,7 @@ const CategoryUpdate = ({ params }) => {
 
       //No slug
       if (!slug) {
+        setLoading(false);
         setFeedback("No category found");
         router.push("/dashboard/categories");
       }
@@ -36,12 +39,14 @@ const CategoryUpdate = ({ params }) => {
 
       // Handle error
       if (error) {
+        setLoading(false);
         setFeedback("Category not found");
         return;
       }
 
       //  Success
       if (data) {
+        setLoading(false);
         setCategory(data[0]);
         setFeedback("");
       }
@@ -52,6 +57,7 @@ const CategoryUpdate = ({ params }) => {
   //Update category
   const updateCategory = async (e) => {
     e.preventDefault();
+    setLoading(true);
     setFeedback("Updating the category,please wait...");
 
     // Get form data
@@ -71,14 +77,20 @@ const CategoryUpdate = ({ params }) => {
 
     // Error
     if (error) {
+      setLoading(false);
       setFeedback("Error updating the category");
       return;
     }
 
     // Success
+    setLoading(false);
     setFeedback("Category updated successfully");
     router.push("/dashboard/categories");
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className={styles.categoryPage}>

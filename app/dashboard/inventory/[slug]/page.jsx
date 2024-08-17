@@ -6,6 +6,7 @@ import styles from "@/app/styles/dashboard.module.css";
 import supabase from "@/app/config/supabaseClient";
 import Feedback from "@/app/components/dashboard/Feedback";
 import FormBtn from "@/app/components/dashboard/FormBtn";
+import Loading from "@/app/loading";
 
 const ProductUpdate = ({ params }) => {
   const router = useRouter();
@@ -13,7 +14,7 @@ const ProductUpdate = ({ params }) => {
   const { slug } = params;
 
   // Variables
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [product, setProduct] = useState();
   const [images, setImages] = useState([]);
@@ -23,7 +24,6 @@ const ProductUpdate = ({ params }) => {
 
   // Get categories
   const getCategories = async () => {
-    setLoading(true);
     setFeedback("Getting categories...");
 
     const { data, error } = await supabase.from("categories").select();
@@ -42,7 +42,6 @@ const ProductUpdate = ({ params }) => {
 
   // Get product
   const getProduct = async () => {
-    setLoading(true);
     setFeedback("Loading product,please wait...");
 
     // No slug
@@ -71,17 +70,17 @@ const ProductUpdate = ({ params }) => {
       setProduct(productData[0]);
 
       // Get images
-      const { data, error } = await supabase.storage
+      const { data: imagesData, error: imagesError } = await supabase.storage
         .from("images")
         .list(`products/${slug}/`);
 
       // Error
-      if (error) {
+      if (imagesError) {
         setFeedback("Error loading product images");
       }
 
       // Images found
-      if (data) {
+      if (imagesData) {
         setImages(data);
       }
       setLoading(false);
@@ -227,6 +226,10 @@ const ProductUpdate = ({ params }) => {
       setFeedback("Error deleting the image");
     }
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className={styles.productUpdate}>

@@ -6,12 +6,13 @@ import styles from "@/app/styles/dashboard.module.css";
 import supabase from "@/app/config/supabaseClient";
 import AddBtn from "@/app/components/dashboard/AddBtn";
 import PaginationBtn from "@/app/components/dashboard/PaginationBtn";
+import Loading from "@/app/loading";
 
 const Inventory = () => {
   //Variables
   const [products, setProducts] = useState([]);
   const [feedback, setFeedback] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(0);
   const totalProducts = products?.length;
   const pageLimit = 12;
@@ -20,7 +21,6 @@ const Inventory = () => {
 
   //Get products
   const getProducts = async () => {
-    setLoading(true);
     setFeedback("Getting products,please wait...");
     let from = page * pageLimit;
     let to = from + pageLimit;
@@ -101,14 +101,20 @@ const Inventory = () => {
     setFeedback("Product deleted successfully");
   };
 
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div className={styles.inventory}>
       {/* Intro */}
       <div className={styles.intro}>
         {/* Text */}
         <p className={styles.introText}>
-          {totalProducts > 0
-            ? `${totalProducts} products found`
+          {loading == false && totalProducts > 0
+            ? `${totalProducts} ${
+                totalProducts.length == 1 ? "product" : "products"
+              } found`
             : "No products found"}
         </p>
         {/* Buttons */}

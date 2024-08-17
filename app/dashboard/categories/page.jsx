@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 import styles from "@/app/styles/dashboard.module.css";
+import Loading from "@/app/loading";
 import supabase from "@/app/config/supabaseClient";
 import AddBtn from "@/app/components/dashboard/AddBtn";
 
@@ -12,13 +13,12 @@ const DashboardCategories = () => {
 
   // Variables
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(true);
   const [feedback, setFeedback] = useState("");
 
   //Load categories on page load
   useEffect(() => {
     const getCategories = async () => {
-      setLoading(true);
       setFeedback("Fetching categories,please wait...");
 
       // Load categories from database
@@ -60,6 +60,10 @@ const DashboardCategories = () => {
     setFeedback("Category deleted");
   };
 
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div className={styles.categories}>
       {/* Add new category */}
@@ -67,7 +71,7 @@ const DashboardCategories = () => {
         <AddBtn text="Add New" link="/dashboard/categories/new" />
       </div>
       {/* Categories table */}
-      {categories?.length > 0 ? (
+      {loading == false && categories?.length > 0 ? (
         <div className={styles.table}>
           <div className={styles.header}>
             <p>Name</p>

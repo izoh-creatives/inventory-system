@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 
 import styles from "@/app/styles/shop.module.css";
+import Loading from "../loading";
 import supabase from "../config/supabaseClient";
 import RoundBtn from "../components/common/RoundBtn";
 
@@ -9,7 +10,7 @@ const Shop = () => {
   // Variables
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(true);
   const [feedback, setFeedback] = useState("");
   const cdnUrl =
     "https://necsftdazwfszvyasjhz.supabase.co/storage/v1/object/public/images/products";
@@ -18,8 +19,6 @@ const Shop = () => {
   useEffect(() => {
     // Get categories
     const getCategories = async () => {
-      setLoading(true);
-
       //Load from database
       const { data, error } = await supabase.from("categories").select();
 
@@ -35,8 +34,6 @@ const Shop = () => {
     };
     // Get products
     const getProducts = async () => {
-      setLoading(true);
-
       //Load from database
       const { data, error } = await supabase.from("products").select();
 
@@ -53,6 +50,10 @@ const Shop = () => {
     getCategories();
     getProducts();
   }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className={styles.shop}>
@@ -92,7 +93,7 @@ const Shop = () => {
       </div>
       {/* Inventory */}
       <div className={styles.products}>
-        {products?.length > 0 ? (
+        {loading == false && products?.length > 0 ? (
           products.map((product, index) => (
             // Product
             <div key={index} className={styles.product}>
