@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import styles from "@/app/styles/dashboard.module.css";
 import { dashboardItems } from "@/data/dashboardItems";
 import RoundBtn from "../common/RoundBtn";
-import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -23,7 +23,7 @@ const Sidebar = () => {
                     <Link key={index} href={subItem.link}>
                       <p
                         className={`${styles.subItem} ${
-                          isActive && styles.activeLink
+                          isActive && styles.active
                         }`}
                       >
                         {subItem.title}

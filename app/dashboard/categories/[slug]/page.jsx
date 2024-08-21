@@ -8,6 +8,7 @@ import Loading from "@/app/loading";
 import Feedback from "@/app/components/dashboard/Feedback";
 import RoundBtn from "@/app/components/common/RoundBtn";
 import FormBtn from "@/app/components/dashboard/FormBtn";
+import slugify from "slugify";
 
 const CategoryUpdate = ({ params }) => {
   const router = useRouter();
@@ -63,7 +64,9 @@ const CategoryUpdate = ({ params }) => {
     // Get form data
     const formData = new FormData(e.currentTarget);
     const name = formData.get("name");
-    const newSlug = formData.get("slug");
+
+    //Create slug from name
+    const newSlug = slugify(name).toLowerCase();
 
     // Update category on database
     const { data, error } = await supabase
@@ -73,7 +76,6 @@ const CategoryUpdate = ({ params }) => {
         slug: newSlug,
       })
       .eq("slug", slug);
-    console.log(data);
 
     // Error
     if (error) {
@@ -105,12 +107,6 @@ const CategoryUpdate = ({ params }) => {
             placeholder="Name"
             name="name"
             defaultValue={category.name}
-          />
-          <input
-            type="text"
-            placeholder="Slug"
-            name="slug"
-            defaultValue={category.slug}
           />
           <FormBtn text="Update category" />
         </form>

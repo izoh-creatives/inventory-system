@@ -7,24 +7,26 @@ import supabase from "@/app/config/supabaseClient";
 import Feedback from "@/app/components/dashboard/Feedback";
 import RoundBtn from "@/app/components/common/RoundBtn";
 import FormBtn from "@/app/components/dashboard/FormBtn";
+import slugify from "slugify";
 
 const NewCategory = ({ category }) => {
   const router = useRouter();
 
   // Variables
   const [name, setName] = useState();
-  const [slug, setSlug] = useState();
   const [feedback, setFeedback] = useState("");
 
   // Reset form
   const resetForm = () => {
     setName("");
-    setSlug("");
   };
 
   //Create category
   const newCategory = async () => {
     setFeedback("Creating a new category...");
+
+    // Create slug from name
+    const slug = slugify(name).toLowerCase();
 
     // Add to database
     const { data, error } = await supabase
@@ -48,18 +50,15 @@ const NewCategory = ({ category }) => {
       {/* Feedback */}
       <Feedback text={feedback} />
       {/* Form */}
-      <form className={`${styles.categoryForm} ${styles.form}`}>
+      <form
+        onSubmit={newCategory}
+        className={`${styles.categoryForm} ${styles.form}`}
+      >
         <input
           type="text"
           placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Slug"
-          value={slug}
-          onChange={(e) => setSlug(e.target.value)}
         />
         <FormBtn text="Add category" />
       </form>

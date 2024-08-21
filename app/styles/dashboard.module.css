@@ -1,5 +1,60 @@
 /* Common styles */
 /* Every dashboard page */
+.dashboardLayout {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+/* Dashboard sidebar */
+.sidebar {
+  width: 100%;
+  height: 100%;
+  background: lightgrey;
+  box-shadow: 0 0 3px lightgrey;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 50px 12px 30px;
+}
+
+.sidebar .items {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 15px;
+}
+.item {
+  width: 100%;
+}
+.item .title {
+  font-weight: 550;
+  padding: 6px 0 2px 5px;
+}
+.subItems {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  padding: 10px 5px 10px 15px;
+}
+.subItem {
+  font-size: 13px;
+  font-weight: 550;
+  color: black;
+}
+.subItem:hover,
+.subItem.active {
+  color: #007bff;
+}
+/* Dashboard pages */
+.adminPage {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 30px 10px 40px 10px;
+}
 .adminPage {
   width: 100%;
   /* overflow-x: hidden; */

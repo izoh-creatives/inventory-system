@@ -6,6 +6,7 @@ import Link from "next/link";
 import styles from "@/app/styles/dashboard.module.css";
 import Loading from "@/app/loading";
 import supabase from "@/app/config/supabaseClient";
+import Feedback from "@/app/components/dashboard/Feedback";
 import AddBtn from "@/app/components/dashboard/AddBtn";
 
 const DashboardCategories = () => {
@@ -66,6 +67,7 @@ const DashboardCategories = () => {
 
   return (
     <div className={styles.categories}>
+      <Feedback text={feedback} />
       {/* Add new category */}
       <div className={styles.addBtn}>
         <AddBtn text="Add New" link="/dashboard/categories/new" />

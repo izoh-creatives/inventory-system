@@ -7,6 +7,7 @@ import supabase from "@/app/config/supabaseClient";
 import Feedback from "@/app/components/dashboard/Feedback";
 import FormBtn from "@/app/components/dashboard/FormBtn";
 import Loading from "@/app/loading";
+import { products } from "@/data/products";
 
 const ProductUpdate = ({ params }) => {
   const router = useRouter();
@@ -46,7 +47,7 @@ const ProductUpdate = ({ params }) => {
 
     // No slug
     if (!slug) {
-      setFeedback("Product with that slug not found");
+      setFeedback("Product not found");
       setLoading(false);
       return;
     }
@@ -81,7 +82,7 @@ const ProductUpdate = ({ params }) => {
 
       // Images found
       if (imagesData) {
-        setImages(data);
+        setImages(imagesData);
       }
       setLoading(false);
       setFeedback("");
@@ -251,9 +252,16 @@ const ProductUpdate = ({ params }) => {
             <option defaultValue="" disabled>
               Category
             </option>
-            <option value="electronics">Electronics</option>
-            <option value="Home">Home</option>
-            <option value="Clothing">Clothing</option>
+            {categories.length > 0 &&
+              categories.map((category, index) => (
+                <option
+                  key={index}
+                  value={category.name}
+                  selected={category.name == product.category}
+                >
+                  {category.name}
+                </option>
+              ))}
           </select>
           <input
             type="text"
@@ -271,7 +279,7 @@ const ProductUpdate = ({ params }) => {
             type="file"
             name="image"
             onChange={handleImages}
-            required={product.image == null}
+            required={product.images.length <= 0 && images.length <= 0}
             multiple
           />
           {product != null && product.images.length > 0 && (
